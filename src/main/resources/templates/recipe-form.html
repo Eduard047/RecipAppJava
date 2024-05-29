@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Recipe</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div id="branding">
+            <h1>Recipe App</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/addRecipe}">Add Recipe</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="container">
+    <h2>Add a New Recipe</h2>
+    <form th:action="@{/saveRecipe}" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="ingredients">Ingredients:</label>
+        <textarea id="ingredients" name="ingredients" required></textarea>
+        <label for="instructions">Instructions:</label>
+        <textarea id="instructions" name="instructions" required></textarea>
+        <label for="category">Category:</label>
+        <select id="category" name="category" required>
+            <option value="Main Course">Main Course</option>
+            <option value="Breakfast">Breakfast</option>
+            <option value="Salad">Salad</option>
+            <option value="Soup">Soup</option>
+            <option value="Dessert">Dessert</option>
+            <option value="Pizza">Pizza</option>
+            <option value="Sushi">Sushi</option>
+        </select>
+        <button type="submit">Add Recipe</button>
+    </form>
+</div>
+<footer>
+    <p>Recipe App &copy; 2024</p>
+</footer>
+</body>
+</html>

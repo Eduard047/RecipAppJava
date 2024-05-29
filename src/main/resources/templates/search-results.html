@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div id="branding">
+            <h1>Recipe App</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/addRecipe}">Add Recipe</a></li>
+                <li><a th:href="@{/category/Main Course}">Main Course</a></li>
+                <li><a th:href="@{/category/Breakfast}">Breakfast</a></li>
+                <li><a th:href="@{/category/Salad}">Salad</a></li>
+                <li><a th:href="@{/category/Soup}">Soup</a></li>
+                <li><a th:href="@{/category/Dessert}">Dessert</a></li>
+                <li><a th:href="@{/category/Pizza}">Pizza</a></li>
+                <li><a th:href="@{/category/Sushi}">Sushi</a></li>
+            </ul>
+            <form th:action="@{/search}" method="get">
+                <input type="text" name="keyword" th:value="${keyword}" placeholder="Search recipes...">
+                <select name="sortBy">
+                    <option value="name" th:selected="${sortBy == 'name'}">Name</option>
+                    <option value="category" th:selected="${sortBy == 'category'}">Category</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
+        </nav>
+    </div>
+</header>
+<div class="container">
+    <h2>Search Results</h2>
+    <div th:if="${recipes.isEmpty()}">
+        <p>No recipes found.</p>
+    </div>
+    <div th:each="recipe : ${recipes}" class="recipe">
+        <h3 th:text="${recipe.name}">Recipe Name</h3>
+        <p><strong>Ingredients:</strong> <span th:text="${recipe.ingredients}">Ingredients</span></p>
+        <p><strong>Instructions:</strong> <span th:text="${recipe.instructions}">Instructions</span></p>
+        <form th:action="@{/deleteRecipe/{id}(id=${recipe.id})}" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+</div>
+<footer>
+    <p>Recipe App &copy; 2024</p>
+</footer>
+</body>
+</html>

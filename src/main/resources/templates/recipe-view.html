@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Details</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <div class="container">
+        <div id="branding">
+            <h1>Recipe App</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/addRecipe}">Add Recipe</a></li>
+                <li><a th:href="@{/category/Main Course}">Main Course</a></li>
+                <li><a th:href="@{/category/Breakfast}">Breakfast</a></li>
+                <li><a th:href="@{/category/Salad}">Salad</a></li>
+                <li><a th:href="@{/category/Soup}">Soup</a></li>
+                <li><a th:href="@{/category/Dessert}">Dessert</a></li>
+                <li><a th:href="@{/category/Pizza}">Pizza</a></li>
+                <li><a th:href="@{/category/Sushi}">Sushi</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="container">
+    <h2 th:text="${recipe.name}">Recipe Name</h2>
+    <p><strong>Ingredients:</strong> <span th:text="${recipe.ingredients}">Ingredients</span></p>
+    <p><strong>Instructions:</strong> <span th:text="${recipe.instructions}">Instructions</span></p>
+    <p><strong>Rating:</strong> <span th:text="${recipe.rating}">Rating</span></p>
+    <p><strong>Comments:</strong> <span th:text="${recipe.comment}">Comments</span></p>
+    <form th:action="@{/rateRecipe/{id}(id=${recipe.id})}" method="post">
+        <label for="rating">Rate:</label>
+        <input type="number" id="rating" name="rating" min="1" max="5" required>
+        <button type="submit">Submit Rating</button>
+    </form>
+    <form th:action="@{/commentRecipe/{id}(id=${recipe.id})}" method="post">
+        <label for="comment">Comment:</label>
+        <textarea id="comment" name="comment" required></textarea>
+        <button type="submit">Submit Comment</button>
+    </form>
+    <form th:action="@{/deleteRecipe/{id}(id=${recipe.id})}" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit">Delete</button>
+    </form>
+</div>
+<footer>
+    <p>Recipe App &copy; 2024</p>
+</footer>
+</body>
+</html>
